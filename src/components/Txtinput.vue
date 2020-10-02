@@ -132,9 +132,10 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  min-height: 160px;
+  min-height: 102px;
   min-width: 90%;
   margin: 20px 0 20px 0;
-  background-color: grey;
+  background-color: rgb(0, 0, 0);
+  border: 2px solid black;
 }
 </style>
