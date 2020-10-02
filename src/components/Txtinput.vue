@@ -4,7 +4,7 @@
       <label class="word" >{{text2}}</label>
       <label class="word">{{char}}</label>
     </div>-->
-    <input type="text" v-model="input" @keypress.enter="textInput">
+    <input type="text" class="txtipt" v-model="input" @keypress.enter="textInput" placeholder="type here...">
     <div class="textdisplay">
       <span class="lspace" v-for="(item, index) in letterarr" :key="index">
         <img class="bg" src="../assets/bg.png" alt="bg">
@@ -98,6 +98,11 @@ export default {
   min-height: 80%;
   justify-content: center;
   align-items: center;
+}
+.txtipt {
+  width: 300px;
+  height: 30px;
+  font-size: 20px;
 }
 .lspace {
   position: relative;
