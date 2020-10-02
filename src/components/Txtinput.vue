@@ -7,17 +7,11 @@
     <input type="text" v-model="input" @keypress.enter="textInput">
     <div class="textdisplay">
       <span class="lspace" v-for="(item, index) in letterarr" :key="index">
+        <img class="bg" src="../assets/bg.png" alt="bg">
         <label class="word">{{item[indexlist[index].letter]}}</label>
       </span>
     </div>
     <button @click="textInput">scramble</button>
-    <div class="animated">
-      <div class="letterabs">
-        <span class="lspaceab" style="background-color:gray" v-for="(item, index) in list" :key="index">
-        <label class="word" >{{item}}</label>
-      </span>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -36,6 +30,7 @@ export default {
     }
   },
   mounted() {
+    this.textInput()
     //var tidx = 0;
     //var lidx = 0;
     //var len = this.text.length;
@@ -62,10 +57,10 @@ export default {
     //  }
     //}
     //setInterval(scramble, speed);
-    for(let i = 0; i < 1; i++) {
+    for(let i = 0; i < 10; i++) {
       this.letterarr.push(this.list)
     }
-    for(let i = 0;i < 1; i++) {
+    for(let i = 0;i < 10; i++) {
       this.indexlist.push({letter:29})
     }
   },
@@ -88,7 +83,7 @@ export default {
           else if (this.indexlist[idx].letter < this.list.indexOf(this.text[idx])) {
             this.indexlist[idx].letter++
           } else this.indexlist[idx].letter--
-        }, 30)
+        }, 70)
       }
     }
   },
@@ -105,45 +100,36 @@ export default {
   align-items: center;
 }
 .lspace {
-  min-width: 40px;
-  min-height: 60px;
+  position: relative;
+  min-width: 80px;
+  height: 100px;
+  overflow: hidden;
   margin: 0 2px 0 0;
-  background-color: bisque;
+  background-color: rgb(192, 192, 192);
+}
+.bg {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  height: 90px;
+  opacity: 0.5;
 }
 .word {
-  font-size: 50px;
-  text-align: center;
+  position: absolute;
+  font-size: 153px;
+  font-family: "arcade";
+  line-height: 90px;
+  top: 17px;
+  left: 5px;
 }
 .textdisplay {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 600px;
-}
-.animated {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 50px;
-  height: 80px;
-  overflow: hidden;
-  position: relative;
-  background-color: bisque;
-}
-.letterabs {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 40px;
-  min-height: 60px;
-  margin: 0 0 2px 0;
-  position: absolute;
-  top: 10px;
-  left: 5px;
-}
-.lspaceab {
-  width: 40px;
-  min-height: 60px;
-  margin: 0 0 2px 0;
+  align-items: center;
+  min-height: 160px;
+  min-width: 90%;
+  margin: 20px 0 20px 0;
+  background-color: grey;
 }
 </style>

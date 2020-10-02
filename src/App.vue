@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" style="height:150px; margin-bottom: 50px" src="./assets/scrambler.png">
     <Txtinput/>
   </div>
 </template>
@@ -20,6 +20,10 @@ export default {
 html,body {
   width: 100%;
   height: 100%;
+}
+@font-face {
+  font-family: arcade;
+  src: url('../src/assets/fonts/ARCADE.TTF') format("truetype");
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
