@@ -1,17 +1,17 @@
 <template>
   <div class="main">
-    <!--<div class="textdisplay">
-      <label class="word" >{{text2}}</label>
-      <label class="word">{{char}}</label>
-    </div>-->
-    <input type="text" class="txtipt" v-model="input" @keypress.enter="textInput" placeholder="type here...">
+    <div style="display:flex;justify-content:center;align-items:center">
+      <input type="text" class="txtipt" v-model="input" @keypress.enter="textInput" placeholder="Type here...">
+      <button @click="textInput" style="margin-left:20px">scramble</button>
+    </div>
     <div class="textdisplay">
       <span class="lspace" v-for="(item, index) in letterarr" :key="index">
         <img class="bg" src="../assets/bg.png" alt="bg">
         <label class="word">{{item[indexlist[index].letter]}}</label>
       </span>
     </div>
-    <button @click="textInput">scramble</button>
+    <label class="credits">Made with <a href="https://vuejs.org">Vue.js</a></label>
+    <label class="credits">Font: Arcade by <a href="http://www.pizzadude.dk">Pizzadude</a></label>
   </div>
 </template>
 
@@ -20,58 +20,24 @@ export default {
   data() {
     return {
       scrambling: null,
-      input: "",
+      input: 'Blackmule Scramble',
       text: '',
       letterarr: [],
-      indexlist: [],
-      value: 28,
+      indexlist: [{letter:29}],
       char: '',
       list: ["_",".",",","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"," ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     }
   },
   mounted() {
     this.textInput()
-    //var tidx = 0;
-    //var lidx = 0;
-    //var len = this.text.length;
-    ////var dist = 0;
-    //var speed = 50
-    //var scramble = () => {
-    //  if(tidx == len) {
-    //    clearInterval(this),
-    //    this.text2 = this.text2.slice(0, len -1)
-    //  }
-    //  else if(this.list[lidx] === this.text[tidx]) {
-    //    this.text2 = this.text2 + this.char,
-    //    //lidx = 0;
-    //    tidx ++
-    //  } else {
-    //    if(this.list.indexOf(this.text[tidx]) > lidx) {
-    //      lidx++;
-    //      //dist = this.list.indexOf(this.text[tidx]) - lidx
-    //    }else {
-    //      lidx--;
-    //      //dist = lidx - this.list.indexOf(this.text[tidx])
-    //      }
-    //    this.char = this.list[lidx]
-    //  }
-    //}
-    //setInterval(scramble, speed);
-    for(let i = 0; i < 10; i++) {
-      this.letterarr.push(this.list)
-    }
-    for(let i = 0;i < 10; i++) {
-      this.indexlist.push({letter:29})
-    }
   },
   methods: {
-    textInput() {
+    async textInput() {
       this.text = this.input
       this.scramble()
       this.input = ''
     },
     scramble() {
-      //var dist = Math.round((29 - this.text.length) / 2);
       this.letterarr = []
       for(let i = 0;i < this.text.length; i++) {
         this.letterarr.push(this.list)
@@ -83,7 +49,7 @@ export default {
           else if (this.indexlist[idx].letter < this.list.indexOf(this.text[idx])) {
             this.indexlist[idx].letter++
           } else this.indexlist[idx].letter--
-        }, 70)
+        }, 50)
       }
     }
   },
@@ -137,5 +103,11 @@ export default {
   margin: 20px 0 20px 0;
   background-color: rgb(0, 0, 0);
   border: 2px solid black;
+  overflow: hidden;
+}
+.credits {
+  margin-top: 20px;
+  font-size: 20px;;
+
 }
 </style>
