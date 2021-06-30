@@ -25,7 +25,7 @@ export default {
       letterarr: [],
       indexlist: [{letter:29}],
       char: '',
-      list: ["_",".",",","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"," ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+      list: ["_",".",",","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"," "]
     }
   },
   mounted() {
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     async textInput() {
-      this.text = this.input
+      this.text = this.input.toUpperCase()
       this.scramble()
       this.input = ''
     },
@@ -46,10 +46,11 @@ export default {
       for(let idx in this.indexlist) {
         this.scrambling = setInterval(() => {
           if (this.indexlist[idx].letter === this.list.indexOf(this.text[idx])) clearInterval(this.scrambling);
-          else if (this.indexlist[idx].letter < this.list.indexOf(this.text[idx])) {
-            this.indexlist[idx].letter++
-          } else this.indexlist[idx].letter--
-        }, 50)
+          else this.indexlist[idx].letter = Math.floor(Math.random() * 30)
+          //else if (this.indexlist[idx].letter < this.list.indexOf(this.text[idx])) {
+          //  this.indexlist[idx].letter++
+          //} else this.indexlist[idx].letter--
+        }, 30)
       }
     }
   },
