@@ -17,6 +17,8 @@
 
 <script>
 export default {
+  // Fix: Explicitly name the component with multiple words
+  name: 'TextInput', 
   data() {
     return {
       scrambling: null,
@@ -38,20 +40,31 @@ export default {
       this.input = ''
     },
     scramble() {
-      this.letterarr = []
-      for(let i = 0;i < this.text.length; i++) {
+      // Clear previous data
+      this.letterarr = [] 
+      
+      // Reset indexlist to match new text length
+      this.indexlist = [] 
+      
+      for(let i = 0; i < this.text.length; i++) {
         this.letterarr.push(this.list)
-        this.indexlist.push({letter:29})
+        this.indexlist.push({letter: 29, interval: null}) // Store interval per letter
       }
-      for(let idx in this.indexlist) {
-        this.scrambling = setInterval(() => {
-          if (this.indexlist[idx].letter === this.list.indexOf(this.text[idx])) clearInterval(this.scrambling);
-          else this.indexlist[idx].letter = Math.floor(Math.random() * 30)
-          //else if (this.indexlist[idx].letter < this.list.indexOf(this.text[idx])) {
-          //  this.indexlist[idx].letter++
-          //} else this.indexlist[idx].letter--
+
+      // Loop through each letter position
+      this.indexlist.forEach((item, idx) => {
+        // Assign a unique interval for each letter
+        item.interval = setInterval(() => {
+          const targetIndex = this.list.indexOf(this.text[idx])
+          
+          if (item.letter === targetIndex) {
+            clearInterval(item.interval)
+          } else {
+            // Randomize until match
+            item.letter = Math.floor(Math.random() * this.list.length)
+          }
         }, 30)
-      }
+      })
     }
   },
 }
